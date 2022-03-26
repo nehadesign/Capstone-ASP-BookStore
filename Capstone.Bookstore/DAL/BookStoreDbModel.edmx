@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="dbBookStoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="dbBookStoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Tbl_Cart">
           <Key>
             <PropertyRef Name="CartId" />
@@ -67,6 +67,7 @@
           <Property Name="ProductImage" Type="varchar(max)" />
           <Property Name="IsFeatured" Type="bit" />
           <Property Name="Quantity" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="Tbl_Roles">
           <Key>
@@ -172,8 +173,7 @@ FROM [dbo].[Tbl_ShippingDetails] AS [Tbl_ShippingDetails]</DefiningQuery>
             <End Role="Tbl_ShippingDetails" EntitySet="Tbl_ShippingDetails" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbBookStoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -244,6 +244,7 @@ FROM [dbo].[Tbl_ShippingDetails] AS [Tbl_ShippingDetails]</DefiningQuery>
           <Property Name="Quantity" Type="Int32" />
           <NavigationProperty Name="Tbl_Cart" Relationship="Self.FK__Tbl_Cart__Produc__49C3F6B7" FromRole="Tbl_Product" ToRole="Tbl_Cart" />
           <NavigationProperty Name="Tbl_Category" Relationship="Self.FK__Tbl_Produ__Quant__3B75D760" FromRole="Tbl_Product" ToRole="Tbl_Category" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="Tbl_Roles">
           <Key>
@@ -396,6 +397,7 @@ FROM [dbo].[Tbl_ShippingDetails] AS [Tbl_ShippingDetails]</DefiningQuery>
           <EntitySetMapping Name="Tbl_Product">
             <EntityTypeMapping TypeName="dbBookStoreModel.Tbl_Product">
               <MappingFragment StoreEntitySet="Tbl_Product">
+                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
