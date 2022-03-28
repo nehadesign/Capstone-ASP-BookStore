@@ -174,7 +174,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Model\CategoryDetail.cs" />
+    <Compile Include="Model\ProductDetail.cs" />
     <Compile Include="Model\Shipping.cs" />
+    <Compile Include="Model\ViewModel\BaseViewModel.cs" />
+    <Compile Include="Model\ViewModel\HomeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\GenericRepository.cs" />
     <Compile Include="Repository\GenericUnitOfWork.cs" />
