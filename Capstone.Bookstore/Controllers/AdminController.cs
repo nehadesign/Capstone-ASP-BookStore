@@ -23,32 +23,25 @@ namespace Capstone.Bookstore.Controllers
 
         public ActionResult Categories()
         {
-            List<Tbl_Category> allcategories = _unitOfWork.GetRepositoryInstance<Tbl_Category>().GetAllRecordsIQueryable().Where(i => i.IsDelete == false).ToList();
+            List<Tbl_Category> allcategories = _unitOfWork.GetRepositoryInstance<Tbl_Category>().GetAllRecordsIQueryable().Where(i => i.IsActive == true).ToList();
             return View(allcategories);
         }
-        public ActionResult AddCategory()
+        
+        public ActionResult UpdateCategory()
         {
-            return UpdateCategory(0);
+            return View();
         }
 
-        public ActionResult UpdateCategory(int categoryId=0)
+        [HttpPost]
+        public ActionResult UpdateCategory(Tbl_Category tbl)
         {
-            CategoryDetail cd;
-            if (categoryId != null)
-            {
-                cd = JsonConvert.DeserializeObject<CategoryDetail>(JsonConvert.SerializeObject(_unitOfWork.GetRepositoryInstance<Tbl_Category>().GetFirstorDefault(categoryId)));
-            }
-            else
-            {
-                cd = new CategoryDetail();
-            }
-            return View("UpdateCategory", cd);
-
+            _unitOfWork.GetRepositoryInstance<Tbl_Category>().Add(tbl);
+            return RedirectToAction("Categories");
         }
 
-        public ActionResult CategoryEdit(int catId=0)
+        public ActionResult CategoryEdit(int categoryId)
         {
-            return View(_unitOfWork.GetRepositoryInstance<Tbl_Category>().GetFirstorDefault(catId));
+            return View(_unitOfWork.GetRepositoryInstance<Tbl_Category>().GetFirstorDefault(categoryId));
         }
 
         [HttpPost]
