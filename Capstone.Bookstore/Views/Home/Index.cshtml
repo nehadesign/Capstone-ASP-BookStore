@@ -1,5 +1,8 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@using Capstone.Bookstore.Model.ViewModel
+
+@model HomeViewModel
+@{
+    ViewBag.Title = "Home Page";    
 }
 
 <div id="themeSlider" class="carousel slide" data-interval="3000" data-ride="carousel">
@@ -47,7 +50,7 @@
     <input type="text" placeholder="Enter Keyword" name="searchKey" class="inputComn houseText form-control" />
     <div class="searchIcon">
         <button type="button" class="searchBtn">
-            <img style="height:30px;width:40px"src="~/Images/search.png" />
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
         </button>
     </div>
 
