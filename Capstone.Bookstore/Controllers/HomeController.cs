@@ -3,14 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Capstone.Bookstore.DAL;
+using Capstone.Bookstore.Model.ViewModel;
 
 namespace Capstone.Bookstore.Controllers
 {
     public class HomeController : Controller
     {
+
+
         public ActionResult Index()
         {
-            return View();
+            HomeViewModel homeViewModel = new HomeViewModel();
+            var model = homeViewModel.CreateModel("", 4, 1);           
+            return View(model);
         }
 
         public ActionResult About()

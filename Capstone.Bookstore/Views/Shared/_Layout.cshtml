@@ -1,9 +1,14 @@
-﻿<!DOCTYPE html>
+﻿@using Capstone.Bookstore.DAL
+@using Capstone.Bookstore.Model.ViewModel
+
+@model BaseViewModel
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Book Studio</title>
     @*@Styles.Render("~/Content/css")*@
 
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
@@ -18,7 +23,7 @@
         <div class="row">
             <div class="col-md-6 col-sm-xs-6">
                 <div class="logo">
-                    <h1><a href="#">Online<span>Book Store</span></a></h1>
+                    <h1><a href="@Url.Action("Index", "Home")">Online<span>Book Store</span></a></h1>
                     <p>Welcome to Our Book Store</p>
                 </div>
             </div>
@@ -29,17 +34,17 @@
                         <li>
                             <div class="hidden-xs">
                                 <h4><a>Call Us</a></h4>
-                                <p>226##-#####</p>
+                                <p>226-125-8574</p>
 
                             </div>
 
                             <div class="visible-xs">
-                                <p>226##-#####</p>
+                                <p>226-125-8574</p>
 
                             </div>
                         </li>
                     </ul>
-                    <p>Welcome to Our Book Store</p>
+
                 </div>
             </div>
 
@@ -47,11 +52,21 @@
                 <div class="col-md-12">
                     <div class="nav-menus">
                         <ul class="nav nav-pills">
-                            <li class="active"><a style="border-radius:5px;" href="#">Home</a></li>
-                            <li><a style="border-radius:5px;" href="#">Location</a></li>
-                            <li><a style="border-radius:5px;" href="#">About Us</a></li>
+                            <li class="active"><a style="border-radius:5px;" href="@Url.Action("Index", "Home")">Home</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
 
-
+                                <ul class="dropdown-menu">
+                                    @if (Model.Categories != null)
+                                    {
+                                        foreach (var item in Model.Categories)
+                                        {
+                                            <li><a href="@Url.Action("Category", "Home", new { id = item.CategoryId })">@item.CategoryName</a></li>
+                                        }
+                                    }                                   
+                                </ul>
+                            </li>
+                            <li><a style="border-radius:5px;" href="@Url.Action("About", "Home")">About Us</a></li>
                         </ul>
                     </div>
                 </div>
