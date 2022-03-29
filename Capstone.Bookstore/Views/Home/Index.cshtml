@@ -1,8 +1,6 @@
-﻿@using Capstone.Bookstore.Model.ViewModel
-
-@model HomeViewModel
+﻿@model Capstone.Bookstore.Model.Home.HomeIndexViewModel
 @{
-    ViewBag.Title = "Home Page";    
+    ViewBag.Title = "Home Page";
 }
 
 <div id="themeSlider" class="carousel slide" data-interval="3000" data-ride="carousel">
@@ -14,7 +12,7 @@
     <div class="carousel-inner">
         <div class="item active">
             <div class="imgOverlay"></div>
-            <img style="height:320px;width:100%" src="../Images/pic2.jpg" alt="First slide">
+            <img style="height:320px;width:100%" src="../Images/img1.jpg" alt="First slide">
             <div class="carousel-caption">
                 <h3>New</h3>
 
@@ -22,7 +20,7 @@
         </div>
         <div class="item">
             <div class="imgOverlay"></div>
-            <img style="height:320px;width:100%" src="../Images/pic1.jpg" alt="Second slide">
+            <img style="height:320px;width:100%" src="../Images/img2.jpg" alt="Second slide">
             <div class="carousel-caption">
                 <h3>Trending</h3>
 
@@ -30,7 +28,7 @@
         </div>
         <div class="item">
             <div class="imgOverlay"></div>
-            <img style="height:320px;width:100%" src="../Images/pic3.jpg" alt="Third slide">
+            <img style="height:320px;width:100%" src="../Images/img3.jpg" alt="Third slide">
             <div class="carousel-caption">
                 <h3>Latest</h3>
 
@@ -50,7 +48,7 @@
     <input type="text" placeholder="Enter Keyword" name="searchKey" class="inputComn houseText form-control" />
     <div class="searchIcon">
         <button type="button" class="searchBtn">
-            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            <img style="height:30px;width:40px"src="~/Images/search.png" />
         </button>
     </div>
 
@@ -66,20 +64,46 @@
 </div>
 
 <div class="row product-container">
+    @foreach (var item in Model.ListOfProducts)
+    {
+        <div class="col-md-3 col-sm-3 col-xs-6" style="margin-bottom:8px">
+            <div class="thumbnail product-item" style="height:450px">
 
-    <div class="col-md-3 col-sm-3 col-xs-6" style="margin-bottom:8px">
-        <div class="thumbnail product-item" style="height:300px">
+                <img class="img-responsive" title=" View Product detail"
+                     style="cursor:pointer;height:260px;width:100%"
+                     src="~/ProductImg/@item.ProductImage" />
 
-            <img class="img-responsive" title=" View Product detail"
-                 style="cursor:pointer;height:160px;width:100%"
-                 src="~/Images/pic4.jpg" />
+                <div class="caption">
+                    <h5>@item.ProductName</h5>
+                    <p>CAD @item.Price</p>
+                    <p>
+                        @if (item.Quantity > 0)
+                            {
+                                <p>Available</p>
+                            }
+                        else
+                            {
 
-            <div class="caption">
-                <h5>Product Name</h5>
-                <p>CAD 50.00 </p>
-                <p>Available</p>
-                <div class="product-item-badge">New</div>
+                            <p>Not Available</p>
+                            }
+                    </p>
+                <div class="product-item-badge">
+
+                    @if (item.IsFeatured == true)
+                    {
+                        <p>New</p>
+                    }
+                    else
+                    {
+
+                        <p>Old</p>
+                    }
+                </div>
+                </div>
             </div>
         </div>
-    </div>
+
+    }
+
+
 </div>
