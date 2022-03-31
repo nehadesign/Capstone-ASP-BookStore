@@ -174,6 +174,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Model\CategoryDetail.cs" />
+    <Compile Include="Model\Home\HomeIndexViewModel.cs" />
     <Compile Include="Model\ProductDetail.cs" />
     <Compile Include="Model\Shipping.cs" />
     <Compile Include="Model\ViewModel\BaseViewModel.cs" />
@@ -1615,6 +1616,23 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\images\pic.jpg" />
+    <Content Include="Images\images\pic1.jpg" />
+    <Content Include="Images\images\pic10.jpg" />
+    <Content Include="Images\images\pic11.jpg" />
+    <Content Include="Images\images\pic12.jpg" />
+    <Content Include="Images\images\pic13.jpg" />
+    <Content Include="Images\images\pic14.jpg" />
+    <Content Include="Images\images\pic15.jpg" />
+    <Content Include="Images\images\pic16.jpeg" />
+    <Content Include="Images\images\pic2.jpg" />
+    <Content Include="Images\images\pic3.jpg" />
+    <Content Include="Images\images\pic4.jpg" />
+    <Content Include="Images\images\pic5.jpeg" />
+    <Content Include="Images\images\pic6.jpg" />
+    <Content Include="Images\images\pic7.jpg" />
+    <Content Include="Images\images\pic8.jpg" />
+    <Content Include="Images\images\pic9.jpg" />
     <Content Include="Images\pic1.jpg" />
     <Content Include="Images\pic2.jpg" />
     <Content Include="Images\pic3.jpg" />
@@ -1696,6 +1714,7 @@
     <Content Include="AdminStyle\vendor\fontawesome-free\webfonts\fa-solid-900.woff2" />
     <Content Include="AdminStyle\vendor\jquery\jquery.min.map" />
     <Content Include="AdminStyle\vendor\jquery\jquery.slim.min.map" />
+    <Content Include="Images\images\.DS_Store" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

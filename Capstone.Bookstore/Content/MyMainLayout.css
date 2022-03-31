@@ -127,6 +127,10 @@ h6 {
         color: #fff;
     }
 
+    .btn{
+        float:right;
+    }
+
 /*CAROUSEL*/
 .main-text {
     position: absolute;
@@ -367,3 +371,7 @@ h6 {
                 margin-left: -8px;
                 margin-top: -9px;
             }
+
+ div.row.product-container .thumbnail.product-item{
+     height:420px;
+ }

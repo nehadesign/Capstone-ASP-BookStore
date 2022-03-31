@@ -12,9 +12,19 @@ namespace Capstone.Bookstore.Controllers
 {
     public class AdminController : Controller
     {
-        // GET: Admin
+       
 
         public GenericUnitOfWork _unitOfWork = new GenericUnitOfWork();
+        public List<SelectListItem> GetCategory()
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+            var cat=_unitOfWork.GetRepositoryInstance<Tbl_Category>().GetAllRecords();
+            foreach (var item in cat)
+            {
+                list.Add(new SelectListItem { Value = item.CategoryId.ToString(), Text = item.CategoryName });
+            }
+            return list;
+        }
         public ActionResult Dashboard()
         {
             return View();
@@ -70,6 +80,7 @@ namespace Capstone.Bookstore.Controllers
 
         public ActionResult ProductAdd()
         {
+            ViewBag.CategoryList = GetCategory();
             return View();
         }
         [HttpPost]

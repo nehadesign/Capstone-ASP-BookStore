@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Capstone.Bookstore.DAL;
+using Capstone.Bookstore.Model.Home;
 using Capstone.Bookstore.Model.ViewModel;
 
 namespace Capstone.Bookstore.Controllers
@@ -14,9 +15,10 @@ namespace Capstone.Bookstore.Controllers
 
         public ActionResult Index()
         {
-            HomeViewModel homeViewModel = new HomeViewModel();
-            var model = homeViewModel.CreateModel("", 4, 1);           
-            return View(model);
+            
+            HomeIndexViewModel model = new HomeIndexViewModel();
+            return View(model.CreateModel());
+
         }
 
         public ActionResult About()

@@ -63,10 +63,12 @@
                                         {
                                             <li><a href="@Url.Action("Category", "Home", new { id = item.CategoryId })">@item.CategoryName</a></li>
                                         }
-                                    }                                   
+                                    }
                                 </ul>
                             </li>
                             <li><a style="border-radius:5px;" href="@Url.Action("About", "Home")">About Us</a></li>
+
+                            <li><button class="btn"><a style="border-radius:5px;" href="@Url.Action("Admin", "Dashboard")">Login</a></button></li>
                         </ul>
                     </div>
                 </div>
