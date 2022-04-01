@@ -31,8 +31,10 @@ namespace Capstone.Bookstore.DAL
         public Nullable<bool> IsFeatured { get; set; }
         public Nullable<int> Quantity { get; set; }
         public Nullable<decimal> Price { get; set; }
+        public Nullable<int> AuthorId { get; set; }
     
         public virtual ICollection<Tbl_Cart> Tbl_Cart { get; set; }
         public virtual Tbl_Category Tbl_Category { get; set; }
+        public virtual Tbl_Author Tbl_Author { get; set; }
     }
 }

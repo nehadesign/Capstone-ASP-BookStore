@@ -34,5 +34,6 @@ namespace Capstone.Bookstore.DAL
         public DbSet<Tbl_Roles> Tbl_Roles { get; set; }
         public DbSet<Tbl_SlideImage> Tbl_SlideImage { get; set; }
         public DbSet<Tbl_ShippingDetails> Tbl_ShippingDetails { get; set; }
+        public DbSet<Tbl_Author> Tbl_Author { get; set; }
     }
 }

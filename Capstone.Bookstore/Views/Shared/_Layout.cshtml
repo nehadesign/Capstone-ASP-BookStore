@@ -1,7 +1,18 @@
 ﻿@using Capstone.Bookstore.DAL
 @using Capstone.Bookstore.Model.ViewModel
+@using Capstone.Bookstore.Model.Home
+@using Capstone.Bookstore.Views.Home
 
 @model BaseViewModel
+
+@{
+    List<Item> cart = null;
+    if (Session["cart"] != null)
+    {
+        cart = (List<Item>)Session["cart"];
+    }
+
+}
 
 <!DOCTYPE html>
 <html>
@@ -46,6 +57,28 @@
                     </ul>
 
                 </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a data-toggle="dropdown"
+                           class="dropdown-toggle"
+                           href="#">Cart(@cart.Count()) <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            @if (cart != null)
+                            {
+                                foreach (var item in cart)
+                                {
+                                    <li>
+                                        <a href="@Url.Action("RemoveFromCart", "Home", new { productId=item.Product.ProductId})">
+                                            @item.Product.ProductName (item.Quantity)
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </li>
+                                    <li class="divider"></li>
+
+                                }
+                            }
+                        </ul>
+                </ul>
             </div>
 
             <div class="row">

@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="dbBookStoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Tbl_Author">
+          <Key>
+            <PropertyRef Name="AuthorId" />
+          </Key>
+          <Property Name="AuthorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AuthorName" Type="varchar" MaxLength="500" />
+        </EntityType>
         <EntityType Name="Tbl_Cart">
           <Key>
             <PropertyRef Name="CartId" />
@@ -68,6 +75,7 @@
           <Property Name="IsFeatured" Type="bit" />
           <Property Name="Quantity" Type="int" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="AuthorId" Type="int" />
         </EntityType>
         <EntityType Name="Tbl_Roles">
           <Key>
@@ -137,7 +145,20 @@ warning 6002: The table/view 'dbBookStore.dbo.Tbl_ShippingDetails' does not have
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Tbl_Product_Tbl_Author">
+          <End Role="Tbl_Author" Type="Self.Tbl_Author" Multiplicity="0..1" />
+          <End Role="Tbl_Product" Type="Self.Tbl_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Author">
+              <PropertyRef Name="AuthorId" />
+            </Principal>
+            <Dependent Role="Tbl_Product">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="dbBookStoreModelStoreContainer">
+          <EntitySet Name="Tbl_Author" EntityType="Self.Tbl_Author" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Cart" EntityType="Self.Tbl_Cart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_CartStatus" EntityType="Self.Tbl_CartStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Category" EntityType="Self.Tbl_Category" Schema="dbo" store:Type="Tables" />
@@ -171,6 +192,10 @@ FROM [dbo].[Tbl_ShippingDetails] AS [Tbl_ShippingDetails]</DefiningQuery>
           <AssociationSet Name="FK__Tbl_Shipp__Payme__4222D4EF" Association="Self.FK__Tbl_Shipp__Payme__4222D4EF">
             <End Role="Tbl_Members" EntitySet="Tbl_Members" />
             <End Role="Tbl_ShippingDetails" EntitySet="Tbl_ShippingDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Product_Tbl_Author" Association="Self.FK_Tbl_Product_Tbl_Author">
+            <End Role="Tbl_Author" EntitySet="Tbl_Author" />
+            <End Role="Tbl_Product" EntitySet="Tbl_Product" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -245,6 +270,8 @@ FROM [dbo].[Tbl_ShippingDetails] AS [Tbl_ShippingDetails]</DefiningQuery>
           <NavigationProperty Name="Tbl_Cart" Relationship="Self.FK__Tbl_Cart__Produc__49C3F6B7" FromRole="Tbl_Product" ToRole="Tbl_Cart" />
           <NavigationProperty Name="Tbl_Category" Relationship="Self.FK__Tbl_Produ__Quant__3B75D760" FromRole="Tbl_Product" ToRole="Tbl_Category" />
           <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="AuthorId" Type="Int32" />
+          <NavigationProperty Name="Tbl_Author" Relationship="dbBookStoreModel.FK_Tbl_Product_Tbl_Author" FromRole="Tbl_Product" ToRole="Tbl_Author" />
         </EntityType>
         <EntityType Name="Tbl_Roles">
           <Key>
@@ -335,7 +362,32 @@ FROM [dbo].[Tbl_ShippingDetails] AS [Tbl_ShippingDetails]</DefiningQuery>
             <End Role="Tbl_Members" EntitySet="Tbl_Members" />
             <End Role="Tbl_ShippingDetails" EntitySet="Tbl_ShippingDetails" />
           </AssociationSet>
+          <EntitySet Name="Tbl_Author" EntityType="dbBookStoreModel.Tbl_Author" />
+          <AssociationSet Name="FK_Tbl_Product_Tbl_Author" Association="dbBookStoreModel.FK_Tbl_Product_Tbl_Author">
+            <End Role="Tbl_Author" EntitySet="Tbl_Author" />
+            <End Role="Tbl_Product" EntitySet="Tbl_Product" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Tbl_Author">
+          <Key>
+            <PropertyRef Name="AuthorId" />
+          </Key>
+          <Property Name="AuthorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AuthorName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tbl_Product" Relationship="dbBookStoreModel.FK_Tbl_Product_Tbl_Author" FromRole="Tbl_Author" ToRole="Tbl_Product" />
+        </EntityType>
+        <Association Name="FK_Tbl_Product_Tbl_Author">
+          <End Type="dbBookStoreModel.Tbl_Author" Role="Tbl_Author" Multiplicity="0..1" />
+          <End Type="dbBookStoreModel.Tbl_Product" Role="Tbl_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Author">
+              <PropertyRef Name="AuthorId" />
+            </Principal>
+            <Dependent Role="Tbl_Product">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -397,6 +449,7 @@ FROM [dbo].[Tbl_ShippingDetails] AS [Tbl_ShippingDetails]</DefiningQuery>
           <EntitySetMapping Name="Tbl_Product">
             <EntityTypeMapping TypeName="dbBookStoreModel.Tbl_Product">
               <MappingFragment StoreEntitySet="Tbl_Product">
+                <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
@@ -442,6 +495,14 @@ FROM [dbo].[Tbl_ShippingDetails] AS [Tbl_ShippingDetails]</DefiningQuery>
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
                 <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Author">
+            <EntityTypeMapping TypeName="dbBookStoreModel.Tbl_Author">
+              <MappingFragment StoreEntitySet="Tbl_Author">
+                <ScalarProperty Name="AuthorName" ColumnName="AuthorName" />
+                <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

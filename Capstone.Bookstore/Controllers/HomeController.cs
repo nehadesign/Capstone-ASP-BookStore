@@ -6,19 +6,18 @@ using System.Web.Mvc;
 using Capstone.Bookstore.DAL;
 using Capstone.Bookstore.Model.Home;
 using Capstone.Bookstore.Model.ViewModel;
+using Capstone.Bookstore.Views.Home;
 
 namespace Capstone.Bookstore.Controllers
 {
     public class HomeController : Controller
     {
-
-
-        public ActionResult Index()
+        dbBookStoreEntities ctx = new dbBookStoreEntities();
+        public ActionResult Index(string search)
         {
-            
             HomeIndexViewModel model = new HomeIndexViewModel();
-            return View(model.CreateModel());
 
+            return View(model.CreateModel(search));
         }
 
         public ActionResult About()
@@ -34,5 +33,51 @@ namespace Capstone.Bookstore.Controllers
 
             return View();
         }
+
+        public RedirectToRouteResult AddToCart(int productId)
+        {
+
+            if (Session["cart"] == null)
+            {
+                List<Item> cart = new List<Item>();
+                var product = ctx.Tbl_Product.Find(productId);
+                cart.Add(new Item()
+                {
+                    Product = product,
+                    Quantity = 1
+                });
+                Session["cart"] = cart;
+            }
+            else
+            {
+                List<Item> cart = (List<Item>)Session["cart"];
+                var product = ctx.Tbl_Product.Find(productId);
+                cart.Add(new Item()
+                {
+                    Product = product,
+                    Quantity = 1
+                });
+                Session["cart"] = cart;
+            }
+            return RedirectToAction("Index");
+        }
+
+
+        public RedirectToRouteResult RemoveFromCart(int productId)
+        {
+            List<Item> cart = (List<Item>)Session["cart"];
+            foreach (var item in cart)
+            {
+                if (item.Product.ProductId == productId)
+                {
+                    cart.Remove(item);
+                    break;
+                }
+
+            }
+            Session["cart"] = cart;
+            return RedirectToAction("Index");
+        }
+
     }
 }
