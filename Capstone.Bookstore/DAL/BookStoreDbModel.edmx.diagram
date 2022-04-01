@@ -17,6 +17,8 @@
         <AssociationConnector Association="dbBookStoreModel.FK__Tbl_Cart__Produc__49C3F6B7" ManuallyRouted="false" />
         <AssociationConnector Association="dbBookStoreModel.FK__Tbl_Produ__Quant__3B75D760" ManuallyRouted="false" />
         <AssociationConnector Association="dbBookStoreModel.FK__Tbl_Shipp__Payme__4222D4EF" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="dbBookStoreModel.Tbl_Author" Width="1.5" PointX="8.375" PointY="6.875" />
+        <AssociationConnector Association="dbBookStoreModel.FK_Tbl_Product_Tbl_Author" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

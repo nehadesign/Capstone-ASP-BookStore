@@ -1,8 +1,8 @@
 ﻿@using Capstone.Bookstore.Model.ViewModel
 
-@model HomeViewModel
+@model Capstone.Bookstore.Model.Home.HomeIndexViewModel
 @{
-    ViewBag.Title = "Home Page";    
+    ViewBag.Title = "Home Page";
 }
 
 <div id="themeSlider" class="carousel slide" data-interval="3000" data-ride="carousel">
@@ -46,40 +46,65 @@
 
 </div>
 <div class="olContent f1"><h2 style="color:black">Search Product/Category</h2></div>
-<div class="olSearch fr">
-    <input type="text" placeholder="Enter Keyword" name="searchKey" class="inputComn houseText form-control" />
-    <div class="searchIcon">
-        <button type="button" class="searchBtn">
-            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-        </button>
+<form method="POST">
+    <div class="olSearch fr">
+        <input type="text" id="search" name="search" placeholder="Enter Keyword" class="inputComn houseText form-control" />
+        <div class="searchIcon">
+            <button type="submit" id="btnSearch" class="searchBtn">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            </button>
+        </div>
     </div>
-
-
-</div>
+</form>
 
 <div class="row">
     <div class="col-md-12">
         <div class="page-header">
-            <h2>Our Products <small>trending products</small></h2>
+            <h2>Our Products</h2>
         </div>
     </div>
 </div>
 
 <div class="row product-container">
+    @if (Model.ListOfProducts.Count() == 0)
+    {
+        <div class="alert alert-danger" role="alert">
+            No record has been found, please try some other term.
+        </div>
+    }
+    @foreach (var item in Model.ListOfProducts)
+    {
+        <div class="col-md-3 col-sm-3 col-xs-6" style="margin-bottom:8px">
+            <div class="thumbnail product-item">
 
-    <div class="col-md-3 col-sm-3 col-xs-6" style="margin-bottom:8px">
-        <div class="thumbnail product-item" style="height:300px">
+                <img class="img-responsive" title=" View Product detail"
+                     style="cursor:pointer;height:160px;width:100%"
+                     src="@item.ProductImage" />
 
-            <img class="img-responsive" title=" View Product detail"
-                 style="cursor:pointer;height:160px;width:100%"
-                 src="~/Images/pic4.jpg" />
+                <div class="caption">
+                    <h5>@item.ProductName</h5>
+                    <h6>@item.Tbl_Author.AuthorName</h6>
+                    <p>$@item.Price.ToString() </p>
+                     <p>
+                        @if (item.Quantity > 0)
+                        {
+                            using (Html.BeginForm("AddToCart", "Home", new { productId = item.ProductId }, FormMethod.Post))
+                            {
+                                <button type="submit" class="pull-right"><i class="fa fa-shopping-cart"></i></button>
+                            }
+                            <p>Available</p>
+                        }
+                        else
+                        {
+                            <p>Not Available</p>
+                        }
+                    </p>
 
-            <div class="caption">
-                <h5>Product Name</h5>
-                <p>CAD 50.00 </p>
-                <p>Available</p>
-                <div class="product-item-badge">New</div>
+                    @*<button>Add to Cart</button> <button>Save for later</button>*@
+
+                    <div class="product-item-badge">@(item.IsFeatured==true ? "New":"Old")</div>
+                </div>
             </div>
         </div>
-    </div>
+    }
 </div>

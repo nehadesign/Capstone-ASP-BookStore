@@ -2,6 +2,7 @@
 using Capstone.Bookstore.Repository;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -19,6 +20,7 @@ namespace Capstone.Bookstore.Model.ViewModel
             var bookData = context.Tbl_Product
                  .Where(p => p.IsActive == true)
                  .Where(p => p.IsDelete == false)
+                 .Include("Tbl_Author")
                  .Skip((int)(page - 1) * pageSize).Take(pageSize);
 
             return new HomeViewModel
