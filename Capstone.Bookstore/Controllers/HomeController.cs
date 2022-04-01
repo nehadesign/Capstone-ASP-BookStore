@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using Capstone.Bookstore.DAL;
 using Capstone.Bookstore.Model.Home;
 using Capstone.Bookstore.Model.ViewModel;
-using Capstone.Bookstore.Views.Home;
+using Capstone.Bookstore.Model;
 
 namespace Capstone.Bookstore.Controllers
 {
@@ -27,6 +27,19 @@ namespace Capstone.Bookstore.Controllers
             return View();
         }
 
+        public ActionResult Checkout()
+        {
+            //ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
+        public ActionResult CheckoutDetails()
+        {
+            //ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
@@ -51,12 +64,20 @@ namespace Capstone.Bookstore.Controllers
             else
             {
                 List<Item> cart = (List<Item>)Session["cart"];
-                var product = ctx.Tbl_Product.Find(productId);
-                cart.Add(new Item()
+                var result = cart.Where(x => x.Product.ProductId == productId).FirstOrDefault();
+                if (result != null)
                 {
-                    Product = product,
-                    Quantity = 1
-                });
+                    cart.Where(x => x.Product.ProductId == productId).FirstOrDefault().Quantity += 1;
+                }
+                else
+                {
+                    var product = ctx.Tbl_Product.Find(productId);
+                    cart.Add(new Item()
+                    {
+                        Product = product,
+                        Quantity = 1
+                    });
+                }
                 Session["cart"] = cart;
             }
             return RedirectToAction("Index");
@@ -77,6 +98,12 @@ namespace Capstone.Bookstore.Controllers
             }
             Session["cart"] = cart;
             return RedirectToAction("Index");
+        }
+
+        public PartialViewResult Categories()
+        {
+            var model = ctx.Tbl_Category.Where(cat => cat.IsActive == true).ToList();
+            return PartialView("~/Views/Shared/_Categories.cshtml", model);
         }
 
     }

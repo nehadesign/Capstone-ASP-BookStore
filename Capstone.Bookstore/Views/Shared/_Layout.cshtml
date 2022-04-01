@@ -1,11 +1,12 @@
 ﻿@using Capstone.Bookstore.DAL
 @using Capstone.Bookstore.Model.ViewModel
 @using Capstone.Bookstore.Model.Home
-@using Capstone.Bookstore.Views.Home
+@using Capstone.Bookstore.Model
 
-@model BaseViewModel
 
 @{
+
+
     List<Item> cart = null;
     if (Session["cart"] != null)
     {
@@ -61,22 +62,40 @@
                     <li class="dropdown">
                         <a data-toggle="dropdown"
                            class="dropdown-toggle"
-                           href="#">Cart(@cart.Count()) <b class="caret"></b></a>
+                           href="#">Cart(@(cart != null ? cart.Count(): 0)) <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             @if (cart != null)
                             {
                                 foreach (var item in cart)
                                 {
+                                    <li class="divider"></li>
                                     <li>
                                         <a href="@Url.Action("RemoveFromCart", "Home", new { productId=item.Product.ProductId})">
-                                            @item.Product.ProductName (item.Quantity)
+                                            @item.Product.ProductName (@item.Quantity)
                                             <i class="fa fa-times"></i>
                                         </a>
                                     </li>
-                                    <li class="divider"></li>
+
 
                                 }
+                                if (cart.Count() > 0)
+                                {
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="@Url.Action("Checkout", "Home")">Checkout</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li style="text-align:center">There is no item </li>
+                                }
+
                             }
+                            else
+                            {
+                                <li style="text-align:center">There is no item </li>
+                            }
+
                         </ul>
                 </ul>
             </div>
@@ -90,13 +109,10 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
 
                                 <ul class="dropdown-menu">
-                                    @if (Model.Categories != null)
-                                    {
-                                        foreach (var item in Model.Categories)
-                                        {
-                                            <li><a href="@Url.Action("Category", "Home", new { id = item.CategoryId })">@item.CategoryName</a></li>
-                                        }
+                                    @{
+                                        Html.RenderAction("Categories", "Home");
                                     }
+
                                 </ul>
                             </li>
                             <li><a style="border-radius:5px;" href="@Url.Action("About", "Home")">About Us</a></li>

@@ -375,3 +375,7 @@ h6 {
  div.row.product-container .thumbnail.product-item{
      height:420px;
  }
+
+ footer{
+     padding-top: 50px !important;
+ }

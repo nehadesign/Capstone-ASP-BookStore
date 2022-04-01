@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Capstone.Bookstore.Views.Home
+namespace Capstone.Bookstore.Model
 {
     public class Item
     {
