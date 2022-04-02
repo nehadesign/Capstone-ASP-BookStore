@@ -96,7 +96,7 @@ namespace Capstone.Bookstore.Controllers
                 if (result != null)
                 {
                     cart.Where(x => x.Product.ProductId == productId).FirstOrDefault().Quantity += 1;
-                }               
+                }
                 Session["cart"] = cart;
             }
             return RedirectToAction("Checkout");
@@ -141,6 +141,13 @@ namespace Capstone.Bookstore.Controllers
 
             var model = ctx.Tbl_Category.Where(cat => cat.IsActive == true).ToList();
             return PartialView("~/Views/Shared/_Categories.cshtml", model);
+        }
+
+        public ActionResult Category(int id = 1)
+        {
+            var model = ctx.Tbl_Product.Include("Tbl_Category").Where(x => x.CategoryId == id);
+
+            return View(model);
         }
 
 
