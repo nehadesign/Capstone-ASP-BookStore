@@ -34,7 +34,9 @@ namespace Capstone.Bookstore.Repository
 
         public IEnumerable<Tbl_Entity> GetAllRecords()
         {
+            
             return _dbSet.ToList();
+           
         }
 
         public IQueryable<Tbl_Entity> GetAllRecordsIQueryable()
