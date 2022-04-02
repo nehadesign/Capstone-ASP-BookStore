@@ -147,7 +147,7 @@ namespace Capstone.Bookstore.Controllers
         {
             var model = ctx.Tbl_Product.Include("Tbl_Category").Where(x => x.CategoryId == id);
 
-            return View(model);
+            return View(model); 
         }
 
 
