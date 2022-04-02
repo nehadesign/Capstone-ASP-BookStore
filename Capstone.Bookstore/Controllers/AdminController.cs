@@ -13,12 +13,12 @@ namespace Capstone.Bookstore.Controllers
     [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
-       
+
         public GenericUnitOfWork _unitOfWork = new GenericUnitOfWork();
         public List<SelectListItem> GetCategory()
         {
             List<SelectListItem> list = new List<SelectListItem>();
-            var cat=_unitOfWork.GetRepositoryInstance<Tbl_Category>().GetAllRecords();
+            var cat = _unitOfWork.GetRepositoryInstance<Tbl_Category>().GetAllRecords();
             foreach (var item in cat)
             {
                 list.Add(new SelectListItem { Value = item.CategoryId.ToString(), Text = item.CategoryName });
@@ -47,7 +47,7 @@ namespace Capstone.Bookstore.Controllers
             List<Tbl_Category> allcategories = _unitOfWork.GetRepositoryInstance<Tbl_Category>().GetAllRecordsIQueryable().Where(i => i.IsActive == true).ToList();
             return View(allcategories);
         }
-        
+
         public ActionResult UpdateCategory()
         {
             return View();
@@ -111,23 +111,23 @@ namespace Capstone.Bookstore.Controllers
             return View();
         }
 
-    
+
 
         [HttpPost]
-        public ActionResult ProductAdd(Tbl_Product tbl,HttpPostedFileBase file)
+        public ActionResult ProductAdd(Tbl_Product tbl, HttpPostedFileBase file)
         {
             string pic = null;
             if (file != null)
             {
-                pic = System.IO.Path.GetFileName(file.FileName);
+                pic = System.IO.Path.GetFileName(file.FileName) + "-" + DateTime.Now.ToString("yyyyMMddHHmmssffff");
                 string path = System.IO.Path.Combine(Server.MapPath("~/Productimg/"), pic);
 
                 //file is uploaded
                 file.SaveAs(path);
-                tbl.ProductImage = string.Concat("/Productimg/",pic);
+                tbl.ProductImage = string.Concat("/Productimg/", pic);
             }
 
-           
+
             tbl.CreatedDate = DateTime.Now;
             _unitOfWork.GetRepositoryInstance<Tbl_Product>().Add(tbl);
             return RedirectToAction("Product");
