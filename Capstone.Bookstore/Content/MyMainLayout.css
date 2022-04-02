@@ -110,15 +110,15 @@ h6 {
     padding-bottom: 20px;
 }
 
-    .nav-menus .nav-pills > li > a {
+    .nav-menus .nav-pills > li a {
         background: transparent;
         color: #333;
     }
 
-        .nav-menus .nav-pills > li > a:hover {
-            background: #eaeaea;
-            color: #333;
-        }
+    .nav-menus .nav-pills > li > a:hover {
+        background: #eaeaea;
+        color: #333;
+    }
 
     .nav-menus .nav-pills > .active > a,
     .nav-menus .nav-pills > .active > a:hover,
@@ -126,6 +126,10 @@ h6 {
         background: #333;
         color: #fff;
     }
+
+.btn {
+    float: right;
+}
 
 /*CAROUSEL*/
 .main-text {
@@ -260,7 +264,7 @@ h6 {
     text-transform: uppercase;
     cursor: pointer;
     height: 44px;
-    text-align:center;
+    text-align: center;
 }
 
     .searchBtn:hover {
@@ -349,8 +353,8 @@ h6 {
             border-radius: 100%;
             font-size: 20px;
             color: #333333;
-            padding-top:4px;
-            text-align:center;
+            padding-top: 4px;
+            text-align: center;
         }
 
             .copyright .list-social > li > a:hover {
@@ -367,3 +371,16 @@ h6 {
                 margin-left: -8px;
                 margin-top: -9px;
             }
+
+div.row.product-container .thumbnail.product-item {
+    height: 420px;
+}
+
+footer {
+    padding-top: 50px !important;
+}
+
+
+.navbar-nav > li > a{
+    color:#000;
+}

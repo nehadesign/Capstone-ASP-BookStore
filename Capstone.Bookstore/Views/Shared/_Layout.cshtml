@@ -1,7 +1,45 @@
 ﻿@using Capstone.Bookstore.DAL
 @using Capstone.Bookstore.Model.ViewModel
+@using Capstone.Bookstore.Model.Home
+@using Capstone.Bookstore.Models
+@using Capstone.Bookstore.Model
 
-@model BaseViewModel
+@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.EntityFramework;
+
+
+@{
+    Boolean IsAdminUser()
+    {
+        if (User.Identity.IsAuthenticated)
+        {
+            var user = User.Identity;
+            ApplicationDbContext context = new ApplicationDbContext();
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var s = UserManager.GetRoles(user.GetUserId());
+            if (s.Contains("Admin"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return false;
+    }
+
+
+    List<Item> cart = null;
+    if (Session["cart"] != null)
+    {
+        cart = (List<Item>)Session["cart"];
+    }
+
+    var showAdminMenu = IsAdminUser();
+
+
+}
 
 <!DOCTYPE html>
 <html>
@@ -46,34 +84,96 @@
                     </ul>
 
                 </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a data-toggle="dropdown"
+                           class="dropdown-toggle"
+                           href="#">Cart(@(cart != null ? cart.Count(): 0)) <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            @if (cart != null)
+                            {
+                                foreach (var item in cart)
+                                {
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="@Url.Action("RemoveFromCart", "Home", new { productId=item.Product.ProductId})">
+                                            @item.Product.ProductName (@item.Quantity)
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </li>
+
+
+                                }
+                                if (cart.Count() > 0)
+                                {
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="@Url.Action("Checkout", "Home")">Checkout</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li style="text-align:center">There is no item </li>
+                                }
+
+                            }
+                            else
+                            {
+                                <li style="text-align:center">There is no item </li>
+                            }
+
+                        </ul>
+                </ul>
             </div>
 
             <div class="row">
                 <div class="col-md-12">
                     <div class="nav-menus">
                         <ul class="nav nav-pills">
-                            <li class="active"><a style="border-radius:5px;" href="@Url.Action("Index", "Home")">Home</a></li>
+                            <li class=""><a style="border-radius:5px;" href="@Url.Action("Index", "Home")">Home</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
 
                                 <ul class="dropdown-menu">
-                                    @if (Model.Categories != null)
-                                    {
-                                        foreach (var item in Model.Categories)
-                                        {
-                                            <li><a href="@Url.Action("Category", "Home", new { id = item.CategoryId })">@item.CategoryName</a></li>
-                                        }
-                                    }                                   
+                                    @{
+                                        Html.RenderAction("Categories", "Home");
+                                    }
+
                                 </ul>
                             </li>
+                            @if (showAdminMenu == true)
+                            {
+                                <li><a href="@Url.Action("AdminLogin", "Authentication")">As Admin</a></li>
+                            }
+
                             <li><a style="border-radius:5px;" href="@Url.Action("About", "Home")">About Us</a></li>
+                            @*<li class="nav navbar-right">
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login <span class="caret"></span></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="@Url.Action("AdminLogin", "Authentication")">As Admin</a></li>
+                                                <li><a href="@Url.Action("UserLogin", "Authentication")">As User</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>*@
+                            @Html.Partial("_LoginPartial")
                         </ul>
+
+
+
                     </div>
                 </div>
 
             </div>
         </div>
-        @RenderBody()
+        <div class="row">
+            <div class="col-md-12">
+                @RenderBody()
+            </div>
+        </div>
+
         <hr />
         <footer>
 

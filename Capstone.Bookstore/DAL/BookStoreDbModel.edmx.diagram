@@ -4,16 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="20b145ca9bb845f4bd27ff4943d021b2" Name="Diagram1">
-        <EntityTypeShape EntityType="dbBookStoreModel.Tbl_Cart" Width="1.5" PointX="5.25" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbBookStoreModel.Tbl_CartStatus" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbBookStoreModel.Tbl_Category" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbBookStoreModel.Tbl_MemberRole" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbBookStoreModel.Tbl_Members" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbBookStoreModel.Tbl_Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbBookStoreModel.Tbl_Roles" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbBookStoreModel.Tbl_SlideImage" Width="1.5" PointX="5.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbBookStoreModel.Tbl_ShippingDetails" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+      <Diagram DiagramId="08e1f1c680114f6892e3590282f8294e" Name="Diagram1">
+        <EntityTypeShape EntityType="dbBookStoreModel.sysdiagram" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBookStoreModel.Tbl_Author" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBookStoreModel.Tbl_Cart" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBookStoreModel.Tbl_CartStatus" Width="1.5" PointX="2.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBookStoreModel.Tbl_Category" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBookStoreModel.Tbl_MemberRole" Width="1.5" PointX="7.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBookStoreModel.Tbl_Members" Width="1.5" PointX="5.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBookStoreModel.Tbl_Product" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBookStoreModel.Tbl_Roles" Width="1.5" PointX="7.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBookStoreModel.Tbl_SlideImage" Width="1.5" PointX="9.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbBookStoreModel.Tbl_ShippingDetails" Width="1.5" PointX="8" PointY="7.625" IsExpanded="true" />
+        <AssociationConnector Association="dbBookStoreModel.FK_Tbl_Product_Tbl_Author" ManuallyRouted="false" />
         <AssociationConnector Association="dbBookStoreModel.FK__Tbl_Cart__Produc__49C3F6B7" ManuallyRouted="false" />
         <AssociationConnector Association="dbBookStoreModel.FK__Tbl_Produ__Quant__3B75D760" ManuallyRouted="false" />
         <AssociationConnector Association="dbBookStoreModel.FK__Tbl_Shipp__Payme__4222D4EF" ManuallyRouted="false" />

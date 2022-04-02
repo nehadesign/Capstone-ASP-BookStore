@@ -3,11 +3,15 @@
 @{
     ViewBag.Title = "ProductEdit";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    List<SelectListItem> data = ViewBag.CategoryList;
+    List<SelectListItem> AuthorList = ViewBag.AuthorList;
+
 }
 
 <div class="container">
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("ProductEdit", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
 
@@ -25,11 +29,12 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-md-6">
                 <div class="form-group">
                     @Html.LabelFor(model => model.CategoryId, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.CategoryId, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.DropDownListFor(model => model.CategoryId, data, "---Select---", new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -75,8 +80,19 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.ProductImage, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.ProductImage, new { htmlAttributes = new { @class = "form-control" } })
+                        @*@Html.EditorFor(model => model.ProductImage, new { htmlAttributes = new { @class = "form-control" } })*@
+                        <input type="file" name="file" id="file" style="width: 100%;" />
                         @Html.ValidationMessageFor(model => model.ProductImage, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.AuthorId, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.AuthorId, AuthorList, "---Select---", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.AuthorId, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
