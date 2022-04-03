@@ -50,7 +50,7 @@ namespace Capstone.Bookstore.Controllers
             return View();
         }
 
-        public RedirectToRouteResult AddToCart(int productId)
+        public RedirectToRouteResult AddToCart(int productId, string returnAction = "Index")
         {
 
             if (Session["cart"] == null)
@@ -83,7 +83,7 @@ namespace Capstone.Bookstore.Controllers
                 }
                 Session["cart"] = cart;
             }
-            return RedirectToAction("Index");
+            return RedirectToAction(returnAction);
         }
 
         public RedirectToRouteResult AddCountToCart(int productId)
@@ -143,13 +143,19 @@ namespace Capstone.Bookstore.Controllers
             return PartialView("~/Views/Shared/_Categories.cshtml", model);
         }
 
-        public ActionResult Category(int id = 1)
+        public ActionResult Category(int? id = null)
         {
-            var model = ctx.Tbl_Product.Include("Tbl_Category").Where(x => x.CategoryId == id);
 
-            return View(model); 
+            var model = ctx.Tbl_Product.Include("Tbl_Category").Where(x => x.CategoryId == id || id == null);
+            ViewBag.CategoryName = id != null ? model.Select(x => x.Tbl_Category.CategoryName).FirstOrDefault() : "ALL";
+            return View(model);        
+
         }
 
+        public ActionResult Deatils(int? id = null)
+        {
+            return View();
+        }
 
     }
 }
