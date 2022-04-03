@@ -16,7 +16,7 @@
             <div class="imgOverlay"></div>
             <img style="height:320px;width:100%" src="../Images/pic2.jpg" alt="First slide">
             <div class="carousel-caption">
-                <h3>New</h3>
+                <p class="slider__h3__title">New</p>
 
             </div>
         </div>
@@ -24,7 +24,7 @@
             <div class="imgOverlay"></div>
             <img style="height:320px;width:100%" src="../Images/pic4.jpg" alt="Second slide">
             <div class="carousel-caption">
-                <h3>Trending</h3>
+                <p class="slider__h3__title">New</p>
 
             </div>
         </div>
@@ -32,26 +32,27 @@
             <div class="imgOverlay"></div>
             <img style="height:320px;width:100%" src="../Images/pic3.jpg" alt="Third slide">
             <div class="carousel-caption">
-                <h3>Latest</h3>
+                <p class="slider__h3__title">New</p>
 
             </div>
         </div>
     </div>
-    <a class="left carousel-control" href="#themeSlider" data-slide="prev">
-        <span class="fa fa-chevron-left"></span>
+    <a class="left carousel-control" title="Left Button" href="#themeSlider" data-slide="prev">
+        <span class="fa fa-chevron-left"></span><span class="hide__text">Dummy Text</span>
     </a>
-    <a class="right carousel-control" href="#themeSlider" data-slide="next">
-        <span class="fa fa-chevron-right"></span>
+    <a class="right carousel-control" title="Right Button" href="#themeSlider" data-slide="next">
+        <span class="fa fa-chevron-right"></span><span class="hide__text">Dummy Text</span>
     </a>
 
 </div>
-<div class="olContent f1"><h2 style="color:black">Search Product/Category</h2></div>
+<div class="olContent f1"><p class="home-page__search__label" style="color:black">Search Product</p></div>
 <form method="POST">
     <div class="olSearch fr">
+        <label for="search" style="display:none">Search</label>
         <input type="text" id="search" name="search" placeholder="Enter Keyword" class="inputComn houseText form-control" />
         <div class="searchIcon">
-            <button type="submit" id="btnSearch" class="searchBtn">
-                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            <button type="submit" value="Submit" id="btnSearch" class="searchBtn">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span><span class="hide__text">Dummy Text</span>
             </button>
         </div>
     </div>
@@ -77,30 +78,26 @@
         <div class="col-md-3 col-sm-3 col-xs-6" style="margin-bottom:8px">
             <div class="thumbnail product-item">
 
-                <img class="img-responsive" title=" View Product detail"
-                     style="cursor:pointer;height:160px;width:100%"
-                     src="@item.ProductImage" />
+                <img class="img-responsive" title="@item.ProductName"
+                     style="cursor:pointer;height:160px;width:auto"
+                     src="@item.ProductImage" alt="@item.ProductName" />
 
                 <div class="caption">
-                    <h5>@item.ProductName</h5>
-                    <h6>@item.Tbl_Author.AuthorName</h6>
+                    <p class="product__name">@item.ProductName</p>
+                    <p class="product__author__name">@item.Tbl_Author.AuthorName</p>
                     <p>$@item.Price.ToString() </p>
-                     <p>
+                    <p>
                         @if (item.Quantity > 0)
                         {
                             using (Html.BeginForm("AddToCart", "Home", new { productId = item.ProductId }, FormMethod.Post))
                             {
-                                <button type="submit" class="pull-right"><i class="fa fa-shopping-cart"></i></button>
+                                <button type="submit" value="Add to Cart" class="pull-right"><i class="fa fa-shopping-cart"></i><span class="hide__text">Dummy Text</span></button>
                             }
-                            <p>Available</p>
-                        }
-                        else
-                        {
-                            <p>Not Available</p>
+
                         }
                     </p>
 
-                    @*<button>Add to Cart</button> <button>Save for later</button>*@
+
 
                     <div class="product-item-badge">@(item.IsFeatured==true ? "New":"Old")</div>
                 </div>

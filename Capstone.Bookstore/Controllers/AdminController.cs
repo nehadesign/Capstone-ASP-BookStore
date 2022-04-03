@@ -90,16 +90,17 @@ namespace Capstone.Bookstore.Controllers
             string pic = null;
             if (file != null)
             {
-                pic = System.IO.Path.GetFileName(file.FileName);
-                string path = System.IO.Path.Combine(Server.MapPath("~/Productimgs/"), pic);
+                pic = System.IO.Path.GetFileName(file.FileName);                
+                string path = System.IO.Path.Combine(Server.MapPath("~/ProductImg/"), pic);
 
                 //file is uploaded
                 file.SaveAs(path);
+                tbl.ProductImage = file != null ? string.Concat("/Productimg/", pic) : tbl.ProductName;
             }
 
-            tbl.ProductImage = file != null ? pic : tbl.ProductImage;
+            //tbl.ProductImage = file != null ? pic : tbl.ProductImage;
             tbl.CreatedDate = DateTime.Now;
-            _unitOfWork.GetRepositoryInstance<Tbl_Product>().Add(tbl);
+            _unitOfWork.GetRepositoryInstance<Tbl_Product>().Update(tbl);
             return RedirectToAction("Product");
         }
 
@@ -119,8 +120,8 @@ namespace Capstone.Bookstore.Controllers
             string pic = null;
             if (file != null)
             {
-                pic = System.IO.Path.GetFileName(file.FileName) + "-" + DateTime.Now.ToString("yyyyMMddHHmmssffff");
-                string path = System.IO.Path.Combine(Server.MapPath("~/Productimg/"), pic);
+                pic = System.IO.Path.GetFileName(file.FileName); // + "-" + DateTime.Now.ToString("yyyyMMddHHmmssffff");
+                string path = System.IO.Path.Combine(Server.MapPath("~/ProductImg/"), pic);
 
                 //file is uploaded
                 file.SaveAs(path);

@@ -5,6 +5,10 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+@{ 
+    int count = 1;
+}
+
 <div class="card mb-3">
     <div class="card-header">
         <i class="fas fa-table"></i>
@@ -18,7 +22,7 @@
                     <tr>
                         <th>Sr. No.</th>
                         <th>Category Name</th>
-                        <th>Action</th>
+                        <th>Action</th>AdminController
 
                     </tr>
                 </thead>
@@ -32,7 +36,7 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        int count = 1;
+                       
                         <tr>
                             <td>@count</td>
                             <td>@item.ProductName</td>
