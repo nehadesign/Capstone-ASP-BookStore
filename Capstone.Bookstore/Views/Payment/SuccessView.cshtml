@@ -3,16 +3,40 @@
     Layout = null;
 }
 
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>@ViewBag.Title - Book Studio</title>
+@*@Styles.Render("~/Content/css")*@
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/MyMainLayout.css" rel="stylesheet" />
+
+
+
+@Scripts.Render("~/bundles/modernizr")
+
+
+@{
+    Session["cart"] = null;
+}
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>SuccessView</title>
+    <title>Payment is successfull</title>
 </head>
 <body>
-    <div>
-        <p>Payment Successful</p>
+    <div class="jumbotron text-center">
+        <h1 class="display-3">Thank You!</h1>
+        <p class="lead"><strong>Your payment is successful and your Order id is @Guid.NewGuid().ToString().Replace("-", "") </strong></p>
+        <hr>
+        <p>
+            Having trouble? <a href="mailto:help@capstonebookstore.somee.com/">Contact us</a>
+        </p>
+        <p class="lead">
+            <a class="btn btn-primary btn-sm" href="@Url.Action("Index", "Home")" role="button">Continue to homepage</a>
+        </p>
     </div>
 </body>
 </html>

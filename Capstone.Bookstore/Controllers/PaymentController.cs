@@ -121,7 +121,7 @@ namespace PayPalApplicetion.Controllers
                     itemList.items.Add(new Item()
                     {
                         name = item.Product.ProductName.ToString(),
-                        currency = "CAD",
+                        currency = "USD",
                         price = item.Product.Price.ToString(),
                         quantity = item.Quantity.ToString(),
                         sku = "sku"
