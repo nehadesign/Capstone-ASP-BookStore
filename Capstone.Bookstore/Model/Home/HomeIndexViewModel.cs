@@ -15,14 +15,14 @@ namespace Capstone.Bookstore.Model.Home
     public class HomeIndexViewModel : BaseViewModel
     {
         public GenericUnitOfWork _unitOfWork = new GenericUnitOfWork();
-        public int PageSize => 4;
+       // public int PageSize => 4;
+       
         dbBookStoreEntities context = new dbBookStoreEntities();
-        public IEnumerable<Tbl_Product> ListOfProducts { get; set; }
-        public HomeIndexViewModel CreateModel(string search = null)
+        public IPagedList<Tbl_Product> ListOfProducts { get; set; }
+        public HomeIndexViewModel CreateModel(string search = null, int? page = null)
         {
             dbBookStoreEntities dbBookStoreEntities = new dbBookStoreEntities();
-            var results = context.Tbl_Product.Include("Tbl_Author").Where(x => x.ProductName.Contains(search) || search == null)
-                .Take(PageSize);
+            var results = context.Tbl_Product.Include("Tbl_Author").Where(x => x.ProductName.Contains(search) || search == null).ToList().ToPagedList(page ?? 1, 4);
             
             return new HomeIndexViewModel()
             {

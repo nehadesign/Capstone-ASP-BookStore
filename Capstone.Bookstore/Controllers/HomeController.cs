@@ -16,11 +16,11 @@ namespace Capstone.Bookstore.Controllers
     public class HomeController : Controller
     {
         dbBookStoreEntities ctx = new dbBookStoreEntities();
-        public ActionResult Index(string search)
+        public ActionResult Index(string search, int ? page)
         {
             HomeIndexViewModel model = new HomeIndexViewModel();
 
-            return View(model.CreateModel(search));
+            return View(model.CreateModel(search,page));
         }
 
         public ActionResult About()
